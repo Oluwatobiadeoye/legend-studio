@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-import type { ExecutionNode } from './nodes/ExecutionNode.js';
-import type { PlatformImplementation } from './nodes/PlatformImplementation.js';
-
-export type RawExecutionPlan = object;
-
-export class ExecutionPlan {
-  rootExecutionNode!: ExecutionNode;
-  processingTemplateFunctions: string[] = [];
-  authDependent!: boolean;
-  kerberos?: string | undefined;
-  globalImplementationSupport?: PlatformImplementation | undefined;
+export enum V1_DataProviderType {
+  AGGREGATOR = 'Aggregator',
+  EXCHANGE = 'Exchange',
+  INTERNAL_APPLICATION = 'InternalApplication',
+  STEWARD = 'Steward',
+  STEWARD_BULK_UPLOAD = 'StewardBulkUpload',
+  REGULATOR = 'Regulator',
 }

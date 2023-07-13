@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-import type { ExecutionNode } from './nodes/ExecutionNode.js';
-import type { PlatformImplementation } from './nodes/PlatformImplementation.js';
+import { type Hashable, hashArray } from '@finos/legend-shared';
+import { MASTERY_HASH_STRUCTURE } from '../../../../../DSL_Mastery_HashUtils.js';
+import type { RawLambda } from '@finos/legend-graph';
 
-export type RawExecutionPlan = object;
+export class PropertyPath implements Hashable {
+  property!: string;
+  filter!: RawLambda;
 
-export class ExecutionPlan {
-  rootExecutionNode!: ExecutionNode;
-  processingTemplateFunctions: string[] = [];
-  authDependent!: boolean;
-  kerberos?: string | undefined;
-  globalImplementationSupport?: PlatformImplementation | undefined;
+  get hashCode(): string {
+    return hashArray([
+      MASTERY_HASH_STRUCTURE.PROPERTY_PATH,
+      this.property,
+      this.filter,
+    ]);
+  }
 }
